@@ -1,0 +1,84 @@
+import { ERROR_MESSAGES } from "../constant/messages";
+import ErrorLoggingService from "../services/ErrorLoggingService";
+import { NotificationService } from "../services/notifications/NotificationService";
+import { TaskPriority, TaskStatus, TaskType } from "../types/common";
+import { IEmployee, ITask } from "../types/interfaces";
+import Employee from "./Employee";
+
+class Task extends NotificationService implements ITask {
+  private readonly _id: string;
+  private readonly _createdAt: Date;
+  private _status: TaskStatus;
+  private _assignedTo: Employee | null = null;
+
+  public get id(): string {
+    return this._id;
+  }
+
+  public get status(): TaskStatus {
+    return this._status;
+  }
+
+  public get createdAt(): Date {
+    return this._createdAt;
+  }
+
+  public get type(): TaskType {
+    return this._type;
+  }
+
+  public get title(): string {
+    return this._title;
+  }
+
+  public get description(): string {
+    return this._description;
+  }
+
+  public get priority(): TaskPriority {
+    return this._priority;
+  }
+
+  public get dueDate(): Date {
+    return this._dueDate;
+  }
+
+  public get assignedTo(): IEmployee | null {
+    return this._assignedTo;
+  }
+
+  constructor(
+    private _type: TaskType,
+    private _title: string,
+    private _description: string,
+    private _priority: TaskPriority,
+    private _dueDate: Date,
+    private errorLogger: ErrorLoggingService
+  ) {
+    super();
+    this._id = "uniqueTaskId";
+    this._status = "New";
+    this._createdAt = new Date();
+  }
+
+  public editTask(taskData: ITask): void {
+    Object.assign(this, taskData);
+  }
+
+  public assignTo(employee: Employee): void {
+    this._assignedTo = employee;
+  }
+
+  public updateStatus(status: TaskStatus): void {
+    if (this._status === "In progress" || (this._status === "Done" && !this._assignedTo)) {
+      const errorMessage = ERROR_MESSAGES.CHANGING_STATUS_OF_UNASSIGNED_TASK(this._status);
+
+      this.errorLogger.addErrorLog(errorMessage);
+      throw new Error(errorMessage);
+    }
+
+    this._status = status;
+  }
+}
+
+export default Task;
