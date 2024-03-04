@@ -22,11 +22,4 @@ type TaskFilterParams = {
 
 type ChangesType = keyof TaskService | keyof EmployeeService;
 
-export {
-  TaskType,
-  TaskPriorityEnum as TaskPriority,
-  TaskStatus,
-  TaskFilterParams,
-  ChangesType,
-  ManagementPositionsEnum,
-};
+export { TaskType, TaskPriorityEnum, TaskStatus, TaskFilterParams, ChangesType, ManagementPositionsEnum };

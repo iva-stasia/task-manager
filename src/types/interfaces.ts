@@ -1,13 +1,13 @@
 import Employee from "../entries/Employee";
 import Task from "../entries/Task";
 import { NotificationService } from "../services/notifications/NotificationService";
-import { TaskFilterParams, TaskPriority, TaskStatus, TaskType } from "./common";
+import { TaskFilterParams, TaskPriorityEnum, TaskType } from "./common";
 
 interface ITask {
   type: TaskType;
   title: string;
   description: string;
-  priority: TaskPriority;
+  priority: TaskPriorityEnum;
   dueDate: Date;
 }
 

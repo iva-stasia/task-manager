@@ -31,7 +31,7 @@ class EmployeeService {
       }
     }
 
-    this.employees = this.employees.filter((employee) => employee.id === employeeId);
+    this.employees = this.employees.filter((employee) => employee.id !== employeeId);
     this.historyService.addHistoryLog(executor, "deleteEmployee");
   }
 

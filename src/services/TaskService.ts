@@ -54,7 +54,7 @@ class TaskService {
 
     const taskToDelete = getByIdFromArray(this.tasks, taskId, this.errorLoggerService);
 
-    this.tasks = this.tasks.filter((task) => task.id === taskToDelete.id);
+    this.tasks = this.tasks.filter((task) => task.id !== taskToDelete.id);
     this.historyService.addHistoryLog(executor, "deleteTask");
   }
 

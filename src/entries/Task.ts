@@ -1,7 +1,7 @@
 import { ERROR_MESSAGES } from "../constant/messages";
 import ErrorLoggingService from "../services/ErrorLoggingService";
 import { NotificationService } from "../services/notifications/NotificationService";
-import { TaskPriority, TaskStatus, TaskType } from "../types/common";
+import { TaskPriorityEnum, TaskStatus, TaskType } from "../types/common";
 import { IEmployee, ITask } from "../types/interfaces";
 import Employee from "./Employee";
 
@@ -27,20 +27,40 @@ class Task extends NotificationService implements ITask {
     return this._type;
   }
 
+  public set type(newType: TaskType) {
+    this._type = newType;
+  }
+
   public get title(): string {
     return this._title;
+  }
+
+  public set title(newTitle: string) {
+    this._title = newTitle;
   }
 
   public get description(): string {
     return this._description;
   }
 
-  public get priority(): TaskPriority {
+  public set description(newDescription: string) {
+    this._description = this.description;
+  }
+
+  public get priority(): TaskPriorityEnum {
     return this._priority;
+  }
+
+  public set priority(newPriority: TaskPriorityEnum) {
+    this._priority = newPriority;
   }
 
   public get dueDate(): Date {
     return this._dueDate;
+  }
+
+  public set dueDate(newDueDate: Date) {
+    this._dueDate = newDueDate;
   }
 
   public get assignedTo(): IEmployee | null {
@@ -51,7 +71,7 @@ class Task extends NotificationService implements ITask {
     private _type: TaskType,
     private _title: string,
     private _description: string,
-    private _priority: TaskPriority,
+    private _priority: TaskPriorityEnum,
     private _dueDate: Date,
     private errorLogger: ErrorLoggingService
   ) {

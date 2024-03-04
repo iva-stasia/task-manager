@@ -3,7 +3,7 @@ import EmployeeService from "./services/EmployeeService";
 import ErrorLoggingService from "./services/ErrorLoggingService";
 import HistoryService from "./services/HistoryService";
 import TaskService from "./services/TaskService";
-import { TaskPriority } from "./types/common";
+import { TaskPriorityEnum } from "./types/common";
 
 class TaskManager {
   private historyService: HistoryService = HistoryService.getInstance();
@@ -22,7 +22,7 @@ taskManager.taskService.createTask(
     type: "Task",
     title: "Funny Task",
     description: "Explanation of the importance of the task",
-    priority: TaskPriority.hight,
+    priority: TaskPriorityEnum.hight,
     dueDate: new Date(),
   },
   manager
