@@ -11,6 +11,10 @@ class EmployeeService {
 
   constructor(private historyService: HistoryService, private errorLoggerService: ErrorLoggingService) {}
 
+  public getEmployees(): Employee[] {
+    return this.employees;
+  }
+
   public addEmployee(employeeData: IEmployee, executor: Employee): void {
     const employee = new Employee(employeeData.name, employeeData.position);
 
@@ -22,7 +26,8 @@ class EmployeeService {
     const employee = getByIdFromArray(this.employees, employeeId, this.errorLoggerService);
 
     const unfinishedTask = employee.tasks.filter((task) => task.status !== "Done");
-    if (unfinishedTask) {
+
+    if (unfinishedTask.length !== 0) {
       if (newEmployeeId) {
         this.reassignTo(newEmployeeId, unfinishedTask);
       } else {
@@ -39,7 +44,7 @@ class EmployeeService {
     const employee = getByIdFromArray(this.employees, employeeId, this.errorLoggerService);
 
     const unfinishedTask = employee.tasks.filter((task) => task.status !== "Done");
-    if (unfinishedTask) {
+    if (unfinishedTask.length !== 0) {
       if (newEmployeeId) {
         this.reassignTo(newEmployeeId, unfinishedTask);
       } else {

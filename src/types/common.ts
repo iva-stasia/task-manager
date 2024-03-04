@@ -8,9 +8,9 @@ enum ManagementPositionsEnum {
 }
 
 enum TaskPriorityEnum {
-  low = "Low",
-  medium = "Medium",
-  hight = "Hight",
+  low = 1,
+  medium = 2,
+  hight = 3,
 }
 
 type TaskType = "Story" | "Bug" | "Task";

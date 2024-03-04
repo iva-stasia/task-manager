@@ -28,6 +28,10 @@ class Employee implements IEmployee {
   public changePosition(newPosition: string): void {
     this._position = newPosition;
   }
+
+  public addTask(task: Task): void {
+    this._tasks.push(task);
+  }
 }
 
 export default Employee;

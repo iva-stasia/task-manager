@@ -87,6 +87,7 @@ class Task extends NotificationService implements ITask {
 
   public assignTo(employee: Employee): void {
     this._assignedTo = employee;
+    employee.addTask(this);
   }
 
   public updateStatus(status: TaskStatus): void {

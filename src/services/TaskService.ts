@@ -8,11 +8,11 @@ import ErrorLoggingService from "./ErrorLoggingService";
 import FilteringService from "./FilteringService";
 import HistoryService from "./HistoryService";
 import SortingService from "./sorting/SortingService";
-import ByCreatedAtSortingStrategy from "./sorting/sorting-strategies/ByCreatedAtSortingStartegy";
+import ByPrioritySortingStrategy from "./sorting/sorting-strategies/ByPrioritySortingStrategy";
 
 class TaskService {
   private readonly filteringService: FilteringService = new FilteringService();
-  private readonly sortingService: SortingService = new SortingService(new ByCreatedAtSortingStrategy());
+  private readonly sortingService: SortingService = new SortingService(new ByPrioritySortingStrategy());
   private tasks: Task[] = [];
 
   constructor(private historyService: HistoryService, private errorLoggerService: ErrorLoggingService) {}
@@ -77,11 +77,11 @@ class TaskService {
   }
 
   public filter(params: TaskFilterParams): Task[] {
-    return this.filteringService.filter(this.tasks, params);
+    return this.filteringService.filter([...this.tasks], params);
   }
 
   public sort(): Task[] {
-    return this.sortingService.sort(this.tasks);
+    return this.sortingService.sort([...this.tasks]);
   }
 }
 
